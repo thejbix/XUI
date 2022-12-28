@@ -17,5 +17,18 @@ class ErasedObservableObject: ObservableObject {
     static func empty() -> ErasedObservableObject {
         .init(objectWillChange: Empty().eraseToAnyPublisher())
     }
+}
 
+
+class ErasedObservableObjectArray: ObservableObject {
+
+    let objectWillChangeList: [AnyPublisher<Void, Never>]
+
+    init(objectWillChangeList: [AnyPublisher<Void, Never>]) {
+        self.objectWillChangeList = objectWillChangeList
+    }
+
+    static func empty() -> ErasedObservableObjectArray {
+        .init(objectWillChangeList: [Empty().eraseToAnyPublisher()])
+    }
 }
