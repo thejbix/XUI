@@ -17,8 +17,13 @@ public struct StoreArray<Model>: DynamicProperty {
         fileprivate var store: StoreArray
 
         public subscript<Value>(dynamicMember keyPath: ReferenceWritableKeyPath<Model, Value>) -> Binding<Value> {
-            Binding(get: { self.store.wrappedValue[keyPath: keyPath] },
-                    set: { self.store.wrappedValue[keyPath: keyPath] = $0 })
+            Binding(get: {
+                print("KeyPath: ", keyPath)
+                return self.store.wrappedValue[keyPath: keyPath]
+            }, set: {
+                print("KeyPath: ", keyPath)
+                self.store.wrappedValue[keyPath: keyPath] = $0
+            })
         }
 
     }
